@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "my_contacts",
+  "info": {
+    "singularName": "my-contact",
+    "pluralName": "my-contacts",
+    "displayName": "my-contact"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "address": {
+      "type": "string"
+    },
+    "address_ar": {
+      "type": "string"
+    },
+    "whatsapp": {
+      "type": "string"
+    }
+  }
+}

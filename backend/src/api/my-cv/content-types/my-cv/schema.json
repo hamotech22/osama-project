@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "my_cvs",
+  "info": {
+    "singularName": "my-cv",
+    "pluralName": "my-cvs",
+    "displayName": "my-cv"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cv": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cv_ar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
