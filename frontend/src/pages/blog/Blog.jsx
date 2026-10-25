@@ -49,7 +49,7 @@ export default function Blog() {
   }, []);
 
   const featured = posts.find((post) => post.featured);
-  const otherPosts = posts.filter((post) => post.id !== featured?.id);
+  const otherPosts = posts.filter((post) => post.id !== featured?.id).slice(0, 4);
   const featuredAuthor = featured?.authors?.[0] ?? featured?.author;
 
   return (

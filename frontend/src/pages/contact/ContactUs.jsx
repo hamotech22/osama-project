@@ -22,7 +22,7 @@ const LIMITS = {
 const COOLDOWN_MS = 30_000; // الفاصل الأدنى بين رسالتين
 
 const inputClasses =
-  "w-full rounded-2xl border border-zinc-200 bg-white/70 px-4 py-3 text-body text-zinc-900 shadow-sm outline-none focus:border-zinc-300 focus:ring-2 focus:ring-blue-500/20";
+  "w-full rounded-2xl border border-zinc-200 bg-white/70 px-4 py-3 text-body text-zinc-900 shadow-sm outline-none focus:border-[#ff4d00] focus:ring-2 focus:ring-[#ff4d00]/20";
 
 export default function ContactUs() {
   const { t } = useLanguage();
