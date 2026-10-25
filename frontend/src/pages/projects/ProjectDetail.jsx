@@ -18,7 +18,10 @@ export default function ProjectDetail() {
 
   useEffect(() => {
     axios
-      .get(`${STRAPI_URL}/api/my-projects?populate[image]=true`)
+      // [تعديل 1] رفع حد الـ 25 مشروع الافتراضي في Strapi (الحد الأقصى الافتراضي 100)
+      .get(`${STRAPI_URL}/api/my-projects`, {
+        params: { "populate[image]": true, "pagination[pageSize]": 100 },
+      })
       .then((response) => setProjects(response.data?.data ?? response.data))
       .catch((error) => {
         console.error("Failed to load projects:", error);

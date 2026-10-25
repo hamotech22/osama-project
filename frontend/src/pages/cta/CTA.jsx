@@ -1,12 +1,45 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import useLanguage from "../../context/useLanguage";
 
-export default function CTA() {
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
+
+export default function CTA({ variant = "default" }) {
   const { t } = useLanguage();
+  const [whatsapp, setWhatsapp] = useState("");
+  const isServicesCta = variant === "services";
+
+  useEffect(() => {
+    if (!isServicesCta) return;
+
+    axios
+      .get(`${STRAPI_URL}/api/my-contact`, { timeout: 8000 })
+      .then((response) => {
+        const contact = response.data?.data ?? response.data;
+        const number = String(contact?.whatsapp ?? "").replace(/\D/g, "");
+        setWhatsapp(number);
+      })
+      .catch((error) => console.error("Failed to load WhatsApp contact:", error));
+  }, [isServicesCta]);
+
+  const title = isServicesCta ? t.services.ctaTitle : t.cta.title;
+  const description = isServicesCta ? t.services.ctaDescription : t.cta.description;
+  const action = isServicesCta ? t.services.ctaAction : t.cta.action;
+  const whatsappMessage = isServicesCta ? t.services.whatsappMessage : "";
+  const href = isServicesCta && whatsapp
+    ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMessage)}`
+    : "/contact";
+  const sectionPadding = isServicesCta
+    ? "px-4 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12"
+    : "px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:py-24";
+  const cardSize = isServicesCta
+    ? "max-w-5xl rounded-2xl px-5 py-8 sm:rounded-3xl sm:px-8 sm:py-10 md:px-10 md:py-12"
+    : "max-w-6xl rounded-2xl px-5 py-12 sm:rounded-3xl sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24";
 
   return (
-    <section id="cta" data-aos="fade-up" className="w-full scroll-mt-24 bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="relative isolate overflow-hidden rounded-2xl bg-[#ff4d00] px-5 py-12 shadow-xl shadow-[#ff4d00]/20 sm:rounded-3xl sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24">
+    <section id="cta" data-aos="fade-up" className={`w-full scroll-mt-24 bg-white ${sectionPadding}`}>
+      <div className={`mx-auto ${isServicesCta ? "max-w-5xl" : "max-w-6xl"}`}>
+        <div className={`relative isolate overflow-hidden bg-[#ff4d00] shadow-xl shadow-[#ff4d00]/20 ${cardSize}`}>
           {/* Background grid */}
           <div
             aria-hidden="true"
@@ -29,22 +62,24 @@ export default function CTA() {
               data-aos="fade-up"
               className="text-balance text-h2 font-semibold leading-tight tracking-tight text-white"
             >
-              {t.cta.title}
+              {title}
             </h2>
 
             <p
               data-aos="fade-up"
               className="mt-4 max-w-2xl text-pretty text-body leading-6 text-white/90 sm:mt-6 sm:leading-7"
             >
-              {t.cta.description}
+              {description}
             </p>
 
             <div data-aos="fade-up" className="mt-7 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:max-w-md sm:flex-row">
               <a
-                href="/contact"
+                href={href}
+                target={isServicesCta && whatsapp ? "_blank" : undefined}
+                rel={isServicesCta && whatsapp ? "noopener noreferrer" : undefined}
                 className="group flex min-h-12 w-full flex-1 items-center justify-center gap-3 rounded-full bg-white px-5 py-3 text-small font-semibold text-zinc-950 shadow-lg shadow-black/10 transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:min-h-14 sm:px-6"
               >
-                <span>{t.cta.action}</span>
+                <span>{action}</span>
 
                 <svg
                   viewBox="0 0 256 256"

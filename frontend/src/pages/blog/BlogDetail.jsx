@@ -32,7 +32,14 @@ export default function BlogPost() {
 
   useEffect(() => {
     axios
-      .get(`${STRAPI_URL}/api/my-blogs?populate[authors][populate]=avatar&populate[image]=true`)
+      // [تعديل 1] رفع حد الـ 25 مقال الافتراضي في Strapi (الحد الأقصى الافتراضي 100)
+      .get(`${STRAPI_URL}/api/my-blogs`, {
+        params: {
+          "populate[authors][populate]": "avatar",
+          "populate[image]": true,
+          "pagination[pageSize]": 100,
+        },
+      })
       .then((response) => {
         const list = response.data?.data ?? response.data;
         setPosts(Array.isArray(list) ? list : []);

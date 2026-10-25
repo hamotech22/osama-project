@@ -16,6 +16,7 @@ import CTA from "./pages/cta/CTA";
 import ProjectsList from "./pages/projects/ProjectsList";
 import ProjectDetail from "./pages/projects/ProjectDetail";
 import Services from "./pages/services/Services";
+import LegalPage from "./pages/legal/LegalPage";
 // import ServiceDetail from "./pages/services/ServiceDetail";
 import Testimonials from "./pages/testimonials/Testimonials";
 import NotFound from "./pages/notFound/NotFound";
@@ -65,6 +66,8 @@ export default function App() {
         {/* <Route path="/services/:slug" element={<ServiceDetail />} /> */}
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/cta" element={<CTA />} />
+        <Route path="/privacy-policy" element={<LegalPage type="privacy" />} />
+        <Route path="/terms" element={<LegalPage type="terms" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
@@ -73,4 +76,3 @@ export default function App() {
     </>
   );
 }
-

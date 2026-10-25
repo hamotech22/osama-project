@@ -19,7 +19,11 @@ export default function Projects({ onLoadingChange }) {
   useEffect(() => {
     onLoadingChange?.(true);
     axios
-      .get(`${STRAPI_URL}/api/my-projects?populate[image]=true`)
+      // [تعديل 1] نطلب أحدث 4 مشاريع بس من Strapi (ترتيب تنازلي بالـ id)،
+      // لأن الافتراضي بيرجّع أول 25 مشروع فقط
+      .get(`${STRAPI_URL}/api/my-projects`, {
+        params: { "populate[image]": true, sort: "id:desc", "pagination[pageSize]": 4 },
+      })
       .then((res) => setProjects(res.data?.data ?? res.data))
       .catch((error) => console.error("Failed to load projects:", error))
       .finally(() => onLoadingChange?.(false));
@@ -62,7 +66,9 @@ export default function Projects({ onLoadingChange }) {
 
         {/* Project cards */}
         <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2">
-          {projects.slice(-4).map((project) => (
+          {/* [تعديل 2] نفس ترتيب العرض القديم (آخر 4 بالترتيب التصاعدي)،
+              وبيشتغل صح حتى لو الـ endpoint تجاهل الباراميترات */}
+          {[...projects].sort((a, b) => b.id - a.id).slice(0, 4).reverse().map((project) => (
             <Link key={project.id} to={`/projects/${project.id}`} className={`group block rounded-3xl ${focusRing}`} data-aos="fade-up">
               <div className="relative aspect-3/2 overflow-hidden rounded-3xl bg-zinc-100 shadow-lg shadow-zinc-900/5 ring-1 ring-zinc-900/5">
                 <img

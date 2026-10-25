@@ -1,5 +1,6 @@
 
 import useLanguage from "../../context/useLanguage";
+import CTA from "../cta/CTA";
 
 const services = [
   {
@@ -74,6 +75,7 @@ export default function Services() {
           ))}
         </div>
       </div>
+      <CTA variant="services" />
     </section>
   );
 }

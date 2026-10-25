@@ -17,8 +17,8 @@ const navLinks = [
 ];
 
 const legalLinks = [
-  { key: "privacy", href: "/contact" },
-  { key: "terms", href: "/contact" },
+  { key: "privacy", href: "/privacy-policy" },
+  { key: "terms", href: "/terms" },
 ];
 
 const focusRing =

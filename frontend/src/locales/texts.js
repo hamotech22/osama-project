@@ -45,6 +45,9 @@ const texts = {
       listTitle: "Selected projects",
       listDescription: "A selection of designs created for brands, products, and people.",
       more: "More projects",
+      prev: "Previous",
+      next: "Next",
+      page: "Page",
       categories: { Branding: "Branding", "Web design": "Web design", Animation: "Animation", UI: "UI", UX: "UX" },
       descriptions: {
         1: "A complete brand identity with a custom logo, color palette, and visual guidelines.",
@@ -61,6 +64,10 @@ const texts = {
       title: "Design made for your brand",
       intro1: "I create purposeful designs for brands, businesses, and people who care about how their story is seen.",
       intro2: "From the first sketch to the final export files, every step is shaped around your brand, audience, and goals, using the full power of Photoshop.",
+      ctaTitle: "Have a design project in mind?",
+      ctaDescription: "Tell me what you need, whether it is a logo, photo retouching, or social media design. Let’s discuss your idea on WhatsApp and find the right next step.",
+      ctaAction: "Discuss your project on WhatsApp",
+      whatsappMessage: "Hi! I’m interested in your design services. I’d like to discuss a project.",
       items: [
         ["Logo Design", "Create a memorable logo and a consistent visual identity that works across your website, social media, and print."],
         ["Photo Retouching", "Professional editing and retouching that fixes, enhances, and brings out the best in every image while keeping it natural."],
@@ -85,6 +92,9 @@ const texts = {
       viewAll: "View all notes",
       listTitle: "Design notes",
       listDescription: "Ideas, references, and practical tips for making stronger designs.",
+      prev: "Previous",
+      next: "Next",
+      page: "Page",
       back: "Back to all notes",
       loading: "Loading article...",
       posts: {},
@@ -127,6 +137,13 @@ const texts = {
       send: "Send message",
       success: "Your message was sent successfully!",
       error: "Something went wrong. Please try again.",
+      requiredFields: "Please enter your name and project details.",
+      nameTooShort: "Your name must be at least 2 characters.",
+      tooLong: "One or more fields exceed the allowed length.",
+      invalidEmail: "Please enter a valid email address.",
+      messageTooShort: "Your message must be at least 10 characters.",
+      waitBeforeResend: "Please wait 30 seconds before sending another message.",
+      validationFailed: "Please check your details and try again.",
       whatsapp: "Usually replies within minutes",
       whatsappLabel: "WhatsApp",
       emailLabel: "Email",
@@ -140,12 +157,71 @@ const texts = {
     footer: {
       privacy: "Privacy policy",
       terms: "Terms & Conditions",
-      copyright: "Copyright © 2026 Hreka Web. All rights reserved.",
+      copyright: "Copyright © 2026 Osama. All rights reserved.",
       credit: "Design portfolio designed and built with",
       backToTop: "Back to top",
       navigation: "Site navigation",
       address: "Address",
 
+    },
+    legal: {
+      back: "Back to home",
+      privacy: {
+        title: "Privacy Policy",
+        intro: "This policy explains what information is handled when you use this portfolio website and how it is used.",
+        sections: [
+          {
+            title: "Information you provide",
+            paragraphs: ["When you submit the contact form, the information you enter, such as your name, email address, and project message, is sent to the website's service providers so your inquiry can be received and answered."],
+          },
+          {
+            title: "How information is used",
+            items: ["To respond to your questions and project inquiries.", "To manage communications related to requested design services.", "To remember your language preference in this browser."],
+          },
+          {
+            title: "Service providers and external links",
+            paragraphs: ["The website uses external services to host and process contact requests. Those providers handle information under their own privacy terms. Links to external websites and social platforms are governed by their respective policies."],
+          },
+          {
+            title: "Your choices and contact",
+            paragraphs: ["Please do not submit sensitive personal information through the contact form. You may contact us to ask about a message you have sent or request that it be removed where applicable."],
+          },
+          {
+            title: "Policy updates",
+            paragraphs: ["This policy may be updated when the website or its services change. The latest version will be published on this page."],
+          },
+        ],
+      },
+      terms: {
+        title: "Terms & Conditions",
+        intro: "By using this website, you agree to these terms. If you do not agree, please do not use the website.",
+        sections: [
+          {
+            title: "Website content",
+            paragraphs: ["The website and its portfolio content are provided for general information and to showcase design work. Project examples do not guarantee a particular outcome for future work."],
+          },
+          {
+            title: "Intellectual property",
+            paragraphs: ["Unless otherwise stated, website text, graphics, and portfolio materials belong to their respective rights holders. You may not copy, republish, or commercially use them without permission."],
+          },
+          {
+            title: "Project inquiries and services",
+            paragraphs: ["Submitting an inquiry does not create a client relationship or guarantee that a project will be accepted. Project scope, fees, timelines, deliverables, and usage rights should be agreed separately in writing before work begins."],
+          },
+          {
+            title: "Acceptable use",
+            paragraphs: ["You agree not to misuse the website, interfere with its operation, attempt unauthorized access, or submit unlawful or harmful content through its forms."],
+          },
+          {
+            title: "External services and availability",
+            paragraphs: ["The website may link to third-party services and depends on external systems for some features. These services may change or become unavailable, and their content and terms are outside our control."],
+          },
+          {
+            title: "Updates",
+            paragraphs: ["These terms may be updated from time to time. Continued use of the website after changes are posted means you accept the updated terms."],
+          },
+        ],
+      },
     },
     metrics: {
       labels: ["Successful projects", "Years of experience", "Logos designed", "Client Satisfaction Rate"],
@@ -201,6 +277,9 @@ const texts = {
       listTitle: "مشاريع مختارة",
       listDescription: "مجموعة من التصاميم التي أُنشئت للعلامات التجارية والمنتجات والأشخاص.",
       more: "مشاريع أخرى",
+      prev: "السابق",
+      next: "التالي",
+      page: "صفحة",
       categories: { Branding: "هوية بصرية", "Web design": "تصميم مواقع", Animation: "تحريك", UI: "واجهات المستخدم", UX: "تجربة المستخدم" },
       descriptions: {
         1: "هوية بصرية متكاملة تشمل شعارًا مخصصًا ولوحة ألوان وإرشادات للاستخدام.",
@@ -217,6 +296,10 @@ const texts = {
       title: "تصميم يعكس هوية علامتك",
       intro1: "أصنع تصاميم هادفة للعلامات التجارية والشركات والأشخاص الذين يهتمون بكيفية ظهور حكايتهم.",
       intro2: "من أول رسم تخطيطي إلى تسليم الملفات النهائية، أصمم كل خطوة حول علامتك وجمهورك وأهدافك، مستفيدًا من كل أدوات فوتوشوب.",
+      ctaTitle: "لديك مشروع تصميم؟",
+      ctaDescription: "أخبرني بما تحتاجه، سواء كان شعارًا أو تعديلًا للصور أو تصميمًا للسوشيال ميديا. لنتحدث عن فكرتك عبر واتساب ونحدد الخطوة المناسبة.",
+      ctaAction: "ناقش مشروعك عبر واتساب",
+      whatsappMessage: "مرحبًا، أنا مهتم بخدمات التصميم وأرغب في مناقشة مشروعي.",
       items: [
         ["تصميم الشعارات", "ابنِ شعارًا لا يُنسى وهوية بصرية متناسقة تعمل بكفاءة على موقعك ومنصات التواصل والمطبوعات."],
         ["تعديل وتجميل الصور", "تعديل احترافي يصلح الصور ويحسّنها ويُبرز أفضل ما فيها مع الحفاظ على مظهرها الطبيعي."],
@@ -241,6 +324,9 @@ const texts = {
       viewAll: "عرض كل المقالات",
       listTitle: "ملاحظات تصميمية",
       listDescription: "أفكار ومراجع ونصائح عملية لصناعة تصاميم أقوى.",
+      prev: "السابق",
+      next: "التالي",
+      page: "صفحة",
       back: "العودة إلى المقالات",
       loading: "جارٍ تحميل المقال...",
       posts: {
@@ -315,6 +401,13 @@ const texts = {
       send: "إرسال الرسالة",
       success: "تم إرسال رسالتك بنجاح!",
       error: "حدث خطأ. يُرجى المحاولة مرة أخرى.",
+      requiredFields: "يرجى إدخال اسمك وتفاصيل المشروع.",
+      nameTooShort: "يجب ألا يقل الاسم عن حرفين.",
+      tooLong: "تجاوز أحد الحقول الحد الأقصى المسموح به.",
+      invalidEmail: "يرجى إدخال بريد إلكتروني صحيح.",
+      messageTooShort: "يجب ألا تقل رسالتك عن 10 أحرف.",
+      waitBeforeResend: "يرجى الانتظار 30 ثانية قبل إرسال رسالة أخرى.",
+      validationFailed: "يرجى مراجعة البيانات والمحاولة مرة أخرى.",
       whatsapp: "نرد عادةً خلال دقائق",
       whatsappLabel: "واتساب",
       emailLabel: "البريد الإلكتروني",
@@ -328,11 +421,70 @@ const texts = {
     footer: {
       privacy: "سياسة الخصوصية",
       terms: "الشروط والأحكام",
-      copyright: "© 2026 هريكا ويب. جميع الحقوق محفوظة.",
+      copyright: "© 2026  أسامه. جميع الحقوق محفوظة.",
       credit: "تم تصميم وبرمجة معرض التصميم بواسطة",
       backToTop: "العودة إلى الأعلى",
       navigation: "روابط الموقع",
       address: "العنوان",
+    },
+    legal: {
+      back: "العودة إلى الرئيسية",
+      privacy: {
+        title: "سياسة الخصوصية",
+        intro: "توضح هذه السياسة المعلومات التي يتم التعامل معها عند استخدام موقع معرض الأعمال وكيفية استخدامها.",
+        sections: [
+          {
+            title: "المعلومات التي تقدمها",
+            paragraphs: ["عند إرسال نموذج التواصل، تُرسل المعلومات التي تدخلها، مثل اسمك وبريدك الإلكتروني ورسالتك عن المشروع، إلى الخدمات المستخدمة في الموقع لاستلام استفسارك والرد عليه."],
+          },
+          {
+            title: "كيفية استخدام المعلومات",
+            items: ["الرد على أسئلتك واستفساراتك المتعلقة بالمشاريع.", "إدارة التواصل بشأن خدمات التصميم التي تطلبها.", "حفظ اختيار اللغة في هذا المتصفح."],
+          },
+          {
+            title: "مقدمو الخدمات والروابط الخارجية",
+            paragraphs: ["يستخدم الموقع خدمات خارجية لاستضافة طلبات التواصل ومعالجتها، وتتعامل هذه الجهات مع المعلومات وفق سياسات الخصوصية الخاصة بها. كما تخضع الروابط الخارجية ومنصات التواصل لسياساتها الخاصة."],
+          },
+          {
+            title: "خياراتك والتواصل",
+            paragraphs: ["يرجى عدم إرسال معلومات شخصية حساسة عبر نموذج التواصل. يمكنك التواصل للاستفسار عن رسالة أرسلتها أو طلب حذفها حيثما ينطبق ذلك."],
+          },
+          {
+            title: "تحديث السياسة",
+            paragraphs: ["قد تُحدّث هذه السياسة عند تغيير الموقع أو الخدمات المستخدمة. تُنشر أحدث نسخة في هذه الصفحة."],
+          },
+        ],
+      },
+      terms: {
+        title: "الشروط والأحكام",
+        intro: "باستخدامك هذا الموقع، فإنك توافق على هذه الشروط. إذا لم توافق عليها، يُرجى عدم استخدام الموقع.",
+        sections: [
+          {
+            title: "محتوى الموقع",
+            paragraphs: ["يُقدّم الموقع ومحتوى معرض الأعمال لأغراض التعريف وعرض نماذج التصميم. ولا تضمن نماذج المشاريع نتيجة معينة لأي عمل مستقبلي."],
+          },
+          {
+            title: "الملكية الفكرية",
+            paragraphs: ["ما لم يُذكر خلاف ذلك، تعود حقوق النصوص والرسومات ومواد معرض الأعمال إلى أصحابها. لا يجوز نسخها أو إعادة نشرها أو استخدامها تجاريًا دون إذن."],
+          },
+          {
+            title: "استفسارات المشاريع والخدمات",
+            paragraphs: ["إرسال استفسار لا ينشئ علاقة تعاقدية ولا يضمن قبول المشروع. يجب الاتفاق كتابيًا على نطاق العمل والرسوم والجدول الزمني والتسليمات وحقوق الاستخدام قبل بدء العمل."],
+          },
+          {
+            title: "الاستخدام المقبول",
+            paragraphs: ["تتعهد بعدم إساءة استخدام الموقع أو تعطيل عمله أو محاولة الوصول غير المصرح به أو إرسال محتوى غير قانوني أو ضار عبر النماذج."],
+          },
+          {
+            title: "الخدمات الخارجية وتوفر الموقع",
+            paragraphs: ["قد يحتوي الموقع على روابط لخدمات خارجية ويعتمد في بعض وظائفه على أنظمة خارجية. قد تتغير هذه الخدمات أو تتوقف، ولا نتحكم في محتواها أو شروطها."],
+          },
+          {
+            title: "التحديثات",
+            paragraphs: ["قد تُحدّث هذه الشروط من وقت لآخر. ويعني استمرارك في استخدام الموقع بعد نشر التغييرات موافقتك على الشروط المحدّثة."],
+          },
+        ],
+      },
     },
     metrics: {
       labels: ["مشروعًا ناجحًا", "سنوات من الخبرة", "شعارًا مصممًا", "نسبة رضا العملاء"],

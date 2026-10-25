@@ -14,17 +14,28 @@
 	--text-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
 }
 
+:root {
+	font-family: var(--font-sans);
+	font-synthesis: none;
+}
+
 html {
 	scroll-behavior: smooth;
 }
 
 body {
-	font-family: var(--font-sans);
+	font-family: inherit;
 	font-size: var(--text-body);
 	line-height: 1.7;
 }
 
 @layer base {
+	*,
+	::before,
+	::after {
+		font-family: inherit;
+	}
+
 	h1 {
 		font-size: var(--text-display);
 		font-weight: 700;

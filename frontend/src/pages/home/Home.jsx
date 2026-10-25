@@ -1,7 +1,6 @@
 import { useState } from "react";
 import About from "../about/About";
 import Blog from "../blog/Blog";
-import CTA from "../cta/CTA";
 import FAQ from "../faq/FAQ";
 import Hero from "../hero/Hero";
 import Loading from "../../components/loading/Loading";
@@ -10,6 +9,7 @@ import Projects from "../projects/Projects";
 import Services from "../services/Services";
 import Testimonials from "../testimonials/Testimonials";
 import DesignPartner from "../designPartner/DesignPartner";
+import ContactUs from "../contact/ContactUs";
 // import BackToTop from "../../components/backToTop/BackToTop";
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
       <Testimonials />
       <Blog />
       <FAQ />
-      <CTA />
+      <ContactUs />
 
       {loading && (
         <div className="fixed inset-0 z-[9999]">
