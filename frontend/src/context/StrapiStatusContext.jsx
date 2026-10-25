@@ -4,9 +4,7 @@ import {
   useEffect,
   useLayoutEffect,
   useState,
-  useContext,
 } from "react";
-import { LangContext } from "./LangContext";
 import { StrapiStatusContext } from "./StrapiStatusStore";
 
 const STRAPI_URL = "http://localhost:1337";
@@ -27,7 +25,6 @@ function isConnectionFailure(error) {
 
 export function StrapiStatusProvider({ children }) {
   const [status, setStatus] = useState("online");
-  const { t } = useContext(LangContext);
 
   const checkConnection = useCallback(async () => {
     try {
@@ -78,23 +75,6 @@ export function StrapiStatusProvider({ children }) {
         checkConnection,
       }}
     >
-      {status === "offline" && (
-        <div
-          role="alert"
-          aria-live="assertive"
-          className="fixed inset-x-0 top-0 z-100 flex items-center justify-center gap-3 bg-red-600 px-4 py-3 text-center text-sm text-white shadow-md"
-        >
-          <span>{t.strapiStatus.message}</span>
-          <button
-            type="button"
-            onClick={checkConnection}
-            className="shrink-0 rounded-lg border border-white/60 px-3 py-1 font-medium transition hover:bg-white/10"
-          >
-            {t.strapiStatus.retry}
-          </button>
-        </div>
-      )}
-
       {children}
     </StrapiStatusContext.Provider>
   );

@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import ReactPaginateModule from "react-paginate";
 import ProjectCard from "./ProjectCard";
 import useLanguage from "../../context/useLanguage";
+import ErrorState from "../../components/ErrorState";
+import { getErrorType } from "../../utils/errorType";
 // const STRAPI_URL = "http://localhost:1337";
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
@@ -18,6 +20,9 @@ export default function ProjectsList() {
   const { t } = useLanguage();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [errorType, setErrorType] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
+  const [slow, setSlow] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const pageCount = Math.ceil(projects.length / PAGE_SIZE);
   const requestedPage = Math.max(1, parseInt(searchParams.get("page"), 10) || 1);
@@ -26,8 +31,10 @@ export default function ProjectsList() {
 
   useEffect(() => {
     const controller = new AbortController();
+    const slowTimer = setTimeout(() => setSlow(true), 4000);
 
     const loadProjects = async () => {
+      setErrorType(null);
       try {
         const response = await axios.get(`${STRAPI_URL}/api/my-projects`, {
           params: {
@@ -35,6 +42,7 @@ export default function ProjectsList() {
             "pagination[page]": 1,
             "pagination[pageSize]": FETCH_PAGE_SIZE,
           },
+          timeout: 8000,
           signal: controller.signal,
         });
         const firstPage = response.data?.data ?? response.data;
@@ -50,6 +58,7 @@ export default function ProjectsList() {
                   "pagination[page]": index + 2,
                   "pagination[pageSize]": FETCH_PAGE_SIZE,
                 },
+                timeout: 8000,
                 signal: controller.signal,
               }),
             ),
@@ -65,16 +74,37 @@ export default function ProjectsList() {
       } catch (error) {
         if (axios.isCancel(error) || controller.signal.aborted) return;
         console.error("Failed to load projects:", error);
-        setProjects([]);
+        setErrorType(getErrorType(error));
+        setProjects((currentProjects) => (currentProjects.length ? currentProjects : []));
       } finally {
+        clearTimeout(slowTimer);
+        setSlow(false);
         if (!controller.signal.aborted) setLoading(false);
       }
     };
 
     loadProjects();
 
-    return () => controller.abort();
+    return () => {
+      clearTimeout(slowTimer);
+      controller.abort();
+    };
+  }, [reloadKey]);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setLoading(true);
+      setReloadKey((key) => key + 1);
+    };
+
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
   }, []);
+
+  const retry = () => {
+    setLoading(true);
+    setReloadKey((key) => key + 1);
+  };
 
   useEffect(() => {
     if (pageCount > 0 && requestedPage !== page) {
@@ -106,8 +136,30 @@ export default function ProjectsList() {
           </p>
         </div>
 
-        {loading && projects.length === 0 && (
-          <p className="py-20 text-center text-body text-zinc-600">{t.projects.loading}</p>
+        {loading && projects.length === 0 && !errorType && (
+          <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2">
+            {Array.from({ length: 4 }, (_, index) => (
+              <div key={index} className="aspect-3/2 animate-pulse rounded-3xl bg-zinc-200" />
+            ))}
+          </div>
+        )}
+        {slow && loading && (
+          <p role="status" className="mb-4 flex items-center justify-center gap-2 rounded-xl bg-amber-50 px-4 py-3 text-center text-small text-amber-700">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="size-4 shrink-0">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            {t.errors.slow}
+          </p>
+        )}
+        {errorType && projects.length === 0 && <ErrorState type={errorType} onRetry={retry} />}
+        {errorType && projects.length > 0 && (
+          <p role="alert" className="mb-4 text-small text-zinc-500">
+            {t.errors.stale}{" "}
+            <button type="button" onClick={retry} className="font-medium text-[#ff4d00] underline">
+              {t.errors.retry}
+            </button>
+          </p>
         )}
 
         <div className={`grid gap-x-6 gap-y-14 transition-opacity duration-300 sm:grid-cols-2 ${loading ? "opacity-50" : "opacity-100"}`}>

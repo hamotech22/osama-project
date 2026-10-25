@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
 import ReactPaginateModule from "react-paginate";
 import useLanguage from "../../context/useLanguage";
+import ErrorState from "../../components/ErrorState";
+import { getErrorType } from "../../utils/errorType";
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 
@@ -33,6 +35,9 @@ const getAvatarUrl = (avatar) => (avatar?.url ? STRAPI_URL + avatar.url : "/imag
 export default function BlogList() {
   const { t, lang } = useLanguage();
   const [posts, setPosts] = useState([]);
+  const [errorType, setErrorType] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
+  const [slow, setSlow] = useState(false);
 
   // [تعديل 4] رقم الصفحة من الرابط (?page=2): الـ Back من المقال بيرجعك لنفس الصفحة
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,49 +51,78 @@ export default function BlogList() {
   useEffect(() => {
     // [تعديل 6] إلغاء الطلب القديم لو المستخدم غيّر الصفحة بسرعة
     const controller = new AbortController();
-    setLoading(true);
+    const slowTimer = setTimeout(() => setSlow(true), 4000);
 
-    axios
-      .get(`${STRAPI_URL}/api/my-blogs`, {
-        // [تعديل 7] نفس الـ populate القديم + باراميترات الـ pagination الخاصة بـ Strapi
-        params: {
-          "populate[authors][populate]": "avatar",
-          "populate[image]": true,
-          "pagination[page]": page,
-          "pagination[pageSize]": PAGE_SIZE,
-        },
-        signal: controller.signal,
-      })
-      .then((response) => {
-        const list = response.data?.data ?? response.data;
-        const items = Array.isArray(list) ? list : [];
-        const meta = response.data?.meta?.pagination;
+    const loadPosts = () => {
+      setErrorType(null);
+      setLoading(true);
 
-        if (meta) {
-          // [تعديل 8] الحالة العادية: Strapi رجّع الصفحة المطلوبة + meta
-          setPosts(items);
-          setPageCount(meta.pageCount);
+      axios
+        .get(`${STRAPI_URL}/api/my-blogs`, {
+          // [تعديل 7] نفس الـ populate القديم + باراميترات الـ pagination الخاصة بـ Strapi
+          params: {
+            "populate[authors][populate]": "avatar",
+            "populate[image]": true,
+            "pagination[page]": page,
+            "pagination[pageSize]": PAGE_SIZE,
+          },
+          timeout: 8000,
+          signal: controller.signal,
+        })
+        .then((response) => {
+          const list = response.data?.data ?? response.data;
+          const items = Array.isArray(list) ? list : [];
+          const meta = response.data?.meta?.pagination;
 
-          // لو الرابط فيه صفحة أكبر من الموجود نرجع لآخر صفحة
-          if (meta.pageCount > 0 && page > meta.pageCount) {
-            setSearchParams({ page: meta.pageCount }, { replace: true });
+          if (meta) {
+            // [تعديل 8] الحالة العادية: Strapi رجّع الصفحة المطلوبة + meta
+            setPosts(items);
+            setPageCount(meta.pageCount);
+
+            // لو الرابط فيه صفحة أكبر من الموجود نرجع لآخر صفحة
+            if (meta.pageCount > 0 && page > meta.pageCount) {
+              setSearchParams({ page: meta.pageCount }, { replace: true });
+            }
+          } else {
+            // [تعديل 9] احتياطي: لو الـ endpoint المخصص مش بيرجّع meta نقسم من الـ frontend
+            setPageCount(Math.max(1, Math.ceil(items.length / PAGE_SIZE)));
+            setPosts(items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE));
           }
-        } else {
-          // [تعديل 9] احتياطي: لو الـ endpoint المخصص مش بيرجّع meta نقسم من الـ frontend
-          setPageCount(Math.max(1, Math.ceil(items.length / PAGE_SIZE)));
-          setPosts(items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE));
-        }
-      })
-      .catch((error) => {
-        if (axios.isCancel(error)) return;
-        console.error("Failed to load blog posts:", error);
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
-      });
+        })
+        .catch((error) => {
+          if (axios.isCancel(error)) return;
+          console.error("Failed to load blog posts:", error);
+          setErrorType(getErrorType(error));
+        })
+        .finally(() => {
+          clearTimeout(slowTimer);
+          setSlow(false);
+          if (!controller.signal.aborted) setLoading(false);
+        });
+    };
 
-    return () => controller.abort();
-  }, [page, setSearchParams]);
+    loadPosts();
+
+    return () => {
+      clearTimeout(slowTimer);
+      controller.abort();
+    };
+  }, [page, reloadKey, setSearchParams]);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setLoading(true);
+      setReloadKey((key) => key + 1);
+    };
+
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
+  }, []);
+
+  const retry = () => {
+    setLoading(true);
+    setReloadKey((key) => key + 1);
+  };
 
   // [تعديل 10] تغيير الصفحة (react-paginate بيبدأ من 0 فبنزود 1) + سكرول لأول الليستة
   const handlePageChange = ({ selected }) => {
@@ -114,8 +148,30 @@ export default function BlogList() {
         </div>
 
         {/* [تعديل 11] رسالة تحميل أول مرة بس */}
-        {loading && posts.length === 0 && (
-          <p className="py-20 text-center text-body text-zinc-600">{t.blog.loading}</p>
+        {loading && posts.length === 0 && !errorType && (
+          <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 4 }, (_, index) => (
+              <div key={index} className="aspect-5/4 animate-pulse rounded-2xl bg-zinc-200" />
+            ))}
+          </div>
+        )}
+        {slow && loading && (
+          <p role="status" className="mb-4 flex items-center justify-center gap-2 rounded-xl bg-amber-50 px-4 py-3 text-center text-small text-amber-700">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="size-4 shrink-0">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            {t.errors.slow}
+          </p>
+        )}
+        {errorType && posts.length === 0 && <ErrorState type={errorType} onRetry={retry} />}
+        {errorType && posts.length > 0 && (
+          <p role="alert" className="mb-4 text-small text-zinc-500">
+            {t.errors.stale}{" "}
+            <button type="button" onClick={retry} className="font-medium text-[#ff4d00] underline">
+              {t.errors.retry}
+            </button>
+          </p>
         )}
 
         {/* Posts grid */}

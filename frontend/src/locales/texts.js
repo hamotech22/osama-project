@@ -1,5 +1,15 @@
 const texts = {
   en: {
+    errors: {
+      retry: "Try again",
+      slow: "Your connection is slow. Still loading…",
+      stale: "Couldn't refresh the content.",
+      network: { title: "The server isn't responding", description: "The service may be down for a moment. Try again shortly." },
+      server: { title: "The server isn't responding", description: "The service may be down for a moment. Try again shortly." },
+      timeout: { title: "The server isn't responding", description: "The service may be down for a moment. Try again shortly." },
+      offline: { title: "You're offline", description: "Check your connection and we'll reload automatically when it's back." },
+      unknown: { title: "The server isn't responding", description: "The service may be down for a moment. Try again shortly." },
+    },
     nav: {
       home: "Home",
       services: "Services",
@@ -150,10 +160,6 @@ const texts = {
       loadError: "Failed to load contact information:",
       sendError: "Failed to send message:",
     },
-    strapiStatus: {
-      message: "Unable to connect to the server. Some site data may be unavailable.",
-      retry: "Retry",
-    },
     footer: {
       privacy: "Privacy policy",
       terms: "Terms & Conditions",
@@ -232,6 +238,16 @@ const texts = {
   },
 
   ar: {
+    errors: {
+      retry: "إعادة المحاولة",
+      slow: "الاتصال بطيء، ما زلنا نحمّل المحتوى…",
+      stale: "تعذّر تحديث المحتوى.",
+      network: { title: "السيرفر لا يستجيب", description: "يبدو أن الخدمة متوقفة مؤقتًا. حاول مرة أخرى بعد قليل." },
+      server: { title: "السيرفر لا يستجيب", description: "يبدو أن الخدمة متوقفة مؤقتًا. حاول مرة أخرى بعد قليل." },
+      timeout: { title: "السيرفر لا يستجيب", description: "يبدو أن الخدمة متوقفة مؤقتًا. حاول مرة أخرى بعد قليل." },
+      offline: { title: "لا يوجد اتصال بالإنترنت", description: "تحقق من اتصالك وسنحمّل المحتوى تلقائيًا عند عودته." },
+      unknown: { title: "السيرفر لا يستجيب", description: "يبدو أن الخدمة متوقفة مؤقتًا. حاول مرة أخرى بعد قليل." },
+    },
     nav: {
       home: "الرئيسية",
       services: "الخدمات",
@@ -413,10 +429,6 @@ const texts = {
       emailLabel: "البريد الإلكتروني",
       loadError: "تعذّر تحميل بيانات التواصل:",
       sendError: "تعذّر إرسال الرسالة:",
-    },
-    strapiStatus: {
-      message: "تعذر الاتصال بالخادم. بعض بيانات الموقع قد لا تكون متاحة حاليًا.",
-      retry: "إعادة المحاولة",
     },
     footer: {
       privacy: "سياسة الخصوصية",
