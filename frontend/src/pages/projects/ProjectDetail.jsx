@@ -44,17 +44,17 @@ export default function ProjectDetail() {
   return (
     <article
       className="w-full bg-white px-5 py-20 sm:py-28 md:px-10 lg:px-16"
-      data-aos="fade-up"
-      data-aos-duration="700"
-      data-aos-offset="30"
+      data-motion="fade-up"
+      data-motion-duration="700"
+      data-motion-offset="30"
     >
       <div className="mx-auto max-w-4xl">
         {/* Back to all projects */}
         <Link
           to="/projects"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
           className={`inline-flex items-center gap-1.5 text-small font-medium text-zinc-500 transition-colors hover:text-[#ff4d00] ${focusRing} rounded-md`}
         >
           <span aria-hidden="true" className="rtl:rotate-180">
@@ -66,32 +66,32 @@ export default function ProjectDetail() {
         {/* Header */}
         <span
           className="mt-8 inline-flex rounded-full bg-[#ff4d00]/10 px-3 py-1.5 text-small font-medium text-[#ff4d00]"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
           {pick(project, "category", lang)}
         </span>
 
         <h1
           className="mt-4 text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-display font-semibold leading-[1.15] tracking-tight text-transparent"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
           {pick(project, "title", lang)}
         </h1>
 
-        <p className="mt-2 text-body text-zinc-500" data-aos="fade-up" data-aos-duration="700" data-aos-offset="30">
+        <p className="mt-2 text-body text-zinc-500" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
           {pick(project, "client", lang)} · {project.year}
         </p>
 
         {/* Main image */}
         <div
           className="mt-10 aspect-3/2 overflow-hidden rounded-3xl bg-zinc-100 shadow-lg shadow-zinc-900/5 ring-1 ring-zinc-900/5"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
           <img
             src={project.image?.url ? STRAPI_URL + project.image.url : ""}
@@ -102,16 +102,16 @@ export default function ProjectDetail() {
 
         <p
           className="mt-8 max-w-2xl text-pretty text-body leading-7 text-zinc-600"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
           {pick(project, "description", lang)}
         </p>
 
         {/* More projects */}
         {related.length > 0 && (
-          <div className="mt-20 border-t border-zinc-100 pt-12" data-aos="fade-up" data-aos-duration="700" data-aos-offset="30">
+          <div className="mt-20 border-t border-zinc-100 pt-12" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
             <h2 className="text-h2 font-semibold tracking-tight text-zinc-950">{t.projects.more}</h2>
 
             <div className="mt-6 grid gap-x-6 gap-y-14 sm:grid-cols-2">

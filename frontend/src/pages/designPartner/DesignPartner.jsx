@@ -3,10 +3,10 @@ import useLanguage from "../../context/useLanguage";
 export default function DesignPartner() {
   const { t } = useLanguage();
   return (
-    <section className="bg-white px-5 py-20 sm:py-28 md:px-10" data-aos="fade-up">
+    <section className="bg-white px-5 py-20 sm:py-28 md:px-10" data-motion="fade-up">
       <div
         className="group relative isolate mx-auto max-w-6xl overflow-hidden rounded-3xl bg-[#111111] px-5 pt-14 text-center shadow-2xl shadow-zinc-900/30 ring-1 ring-white/10 sm:px-10 sm:pt-20"
-        data-aos="fade-up"
+        data-motion="fade-up"
       >
         <div
           aria-hidden="true"
@@ -25,7 +25,7 @@ export default function DesignPartner() {
         <div className="mx-auto max-w-2xl">
           <span
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-small font-medium text-zinc-300 backdrop-blur"
-            data-aos="fade-up"
+            data-motion="fade-up"
           >
             <span className="size-1.5 rounded-full bg-[#ff4d00]" />
             {t.designPartner.badge}
@@ -33,12 +33,12 @@ export default function DesignPartner() {
 
           <h2
             className="mt-6 text-balance bg-linear-to-b from-white to-zinc-400 bg-clip-text text-h2 font-semibold leading-[1.05] tracking-tight text-transparent"
-            data-aos="fade-up"
+            data-motion="fade-up"
           >
             {t.designPartner.title}
           </h2>
 
-          <p className="mx-auto mt-5 max-w-xl text-pretty text-body leading-7 text-zinc-400" data-aos="fade-up">
+          <p className="mx-auto mt-5 max-w-xl text-pretty text-body leading-7 text-zinc-400" data-motion="fade-up">
             {t.designPartner.description}
           </p>
 
@@ -47,7 +47,7 @@ export default function DesignPartner() {
             type="button"
             onClick={() => document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" })}
             className="group/cta mt-9 inline-flex h-14 items-center justify-center gap-3 rounded-full bg-[#ff4d00] px-8 text-small font-semibold text-white shadow-lg shadow-[#ff4d00]/30 transition hover:bg-[#e64305] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            data-aos="fade-up"
+            data-motion="fade-up"
           >
             {t.designPartner.action}
             <svg
@@ -61,7 +61,7 @@ export default function DesignPartner() {
         </div>
 
         {/* Browser mockup */}
-        <div className="relative mx-auto mt-14 max-w-4xl sm:mt-16" data-aos="fade-up">
+        <div className="relative mx-auto mt-14 max-w-4xl sm:mt-16" data-motion="fade-up">
           <div className="absolute -left-4 top-24 z-10 hidden items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-small font-medium text-white shadow-xl backdrop-blur-xl sm:flex lg:-left-12">
             <span className="grid size-7 place-items-center rounded-full bg-[#ff4d00]">
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="size-4">

@@ -37,7 +37,7 @@ export default function CTA({ variant = "default" }) {
     : "max-w-6xl rounded-2xl px-5 py-12 sm:rounded-3xl sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24";
 
   return (
-    <section id="cta" data-aos="fade-up" className={`w-full scroll-mt-24 bg-white ${sectionPadding}`}>
+    <section id="cta" data-motion="fade-up" className={`w-full scroll-mt-24 bg-white ${sectionPadding}`}>
       <div className={`mx-auto ${isServicesCta ? "max-w-5xl" : "max-w-6xl"}`}>
         <div className={`relative isolate overflow-hidden bg-[#ff4d00] shadow-xl shadow-[#ff4d00]/20 ${cardSize}`}>
           {/* Background grid */}
@@ -59,20 +59,20 @@ export default function CTA({ variant = "default" }) {
 
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <h2
-              data-aos="fade-up"
+              data-motion="fade-up"
               className="text-balance text-h2 font-semibold leading-tight tracking-tight text-white"
             >
               {title}
             </h2>
 
             <p
-              data-aos="fade-up"
+              data-motion="fade-up"
               className="mt-4 max-w-2xl text-pretty text-body leading-6 text-white/90 sm:mt-6 sm:leading-7"
             >
               {description}
             </p>
 
-            <div data-aos="fade-up" className="mt-7 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:max-w-md sm:flex-row">
+            <div data-motion="fade-up" className="mt-7 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:max-w-md sm:flex-row">
               <a
                 href={href}
                 target={isServicesCta && whatsapp ? "_blank" : undefined}

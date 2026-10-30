@@ -29,10 +29,10 @@ export default function Services() {
   const { t } = useLanguage();
 
   return (
-    <section className="bg-white px-5 py-20 sm:py-28 md:px-10" data-aos="fade-up">
+    <section className="bg-white px-5 py-20 sm:py-28 md:px-10" data-motion="fade-up">
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         {/* Intro (stays in view while the cards scroll on desktop) */}
-        <div className="md:sticky md:top-28 md:self-start" data-aos="fade-up">
+        <div className="md:sticky md:top-28 md:self-start" data-motion="fade-up">
           <h2 className="max-w-md text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-h2 font-semibold leading-[1.1] tracking-tight text-transparent">
             {t.services.title}
           </h2>
@@ -49,7 +49,7 @@ export default function Services() {
             <div
               key={t.services.items[index][0]}
               className="rounded-3xl border border-zinc-200/70 bg-zinc-50 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-zinc-900/5"
-              data-aos="fade-up"
+              data-motion="fade-up"
             >
               <span className="grid size-11 place-items-center rounded-xl bg-[#ff4d00]/10 text-[#ff4d00]">
                 <svg

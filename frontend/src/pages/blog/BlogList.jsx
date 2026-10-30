@@ -133,13 +133,13 @@ export default function BlogList() {
   return (
     <section
       className="w-full bg-white px-5 py-20 sm:py-28 md:px-10 lg:px-16"
-      data-aos="fade-up"
-      data-aos-duration="700"
-      data-aos-offset="30"
+      data-motion="fade-up"
+      data-motion-duration="700"
+      data-motion-offset="30"
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-12 max-w-2xl sm:mb-16" data-aos="fade-up" data-aos-duration="700" data-aos-offset="30">
+        <div className="mb-12 max-w-2xl sm:mb-16" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
           <h1 className="text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-display font-semibold leading-[1.1] tracking-tight text-transparent">
             {t.blog.listTitle}
           </h1>
@@ -189,9 +189,9 @@ export default function BlogList() {
                 key={post.id}
                 to={`/blog/${post.id}`}
                 className={`group flex flex-col rounded-2xl ${focusRing}`}
-                data-aos="fade-up"
-                data-aos-duration="700"
-                data-aos-offset="30"
+                data-motion="fade-up"
+                data-motion-duration="700"
+                data-motion-offset="30"
               >
                 <div className="aspect-5/4 overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5">
                   <img

@@ -65,16 +65,16 @@ export default function BlogPost() {
   return (
     <article
       className="w-full bg-white px-5 py-20 sm:py-28 md:px-10 lg:px-16"
-      data-aos="fade-up"
-      data-aos-duration="700"
-      data-aos-offset="30"
+      data-motion="fade-up"
+      data-motion-duration="700"
+      data-motion-offset="30"
     >
       <div className="mx-auto max-w-3xl">
         <Link
           to="/blog"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
           className={`inline-flex items-center gap-1.5 text-small font-medium text-zinc-500 transition-colors hover:text-[#ff4d00] ${focusRing} rounded-md`}
         >
           <span aria-hidden="true" className="rtl:rotate-180">
@@ -83,7 +83,7 @@ export default function BlogPost() {
           {t.blog.back}
         </Link>
 
-        <div className="mt-8" data-aos="fade-up" data-aos-duration="700" data-aos-offset="30">
+        <div className="mt-8" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
           <time dateTime={post.date} className="text-small text-zinc-500">
             {formatDate(post.date, lang)}
           </time>
@@ -113,18 +113,18 @@ export default function BlogPost() {
 
         <div
           className="mt-10 aspect-5/3 overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
           <img src={getImageUrl(post.image)} alt={pick(post, "title", lang)} className="size-full object-cover" />
         </div>
 
         <div
           className="prose prose-zinc mt-10 max-w-none text-body leading-7 text-zinc-700 [&_p]:mb-5 [&_h2]:mt-10 [&_h2]:text-h2 [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-zinc-950"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
           dangerouslySetInnerHTML={{ __html: pick(post, "content", lang) }}
         />
       </div>

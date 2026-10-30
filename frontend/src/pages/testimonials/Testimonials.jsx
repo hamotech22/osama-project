@@ -53,10 +53,10 @@ export default function Testimonials() {
   if (!loading && (error || testimonials.length === 0)) return null;
 
   return (
-    <section className="bg-zinc-100 px-5 py-20 sm:py-28 md:px-10" data-aos="fade-up">
+    <section className="bg-zinc-100 px-5 py-20 sm:py-28 md:px-10" data-motion="fade-up">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-12 max-w-2xl sm:mb-16" data-aos="fade-up">
+        <div className="mb-12 max-w-2xl sm:mb-16" data-motion="fade-up">
           <h2 className="text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-h2 font-semibold leading-[1.1] tracking-tight text-transparent">
             {t.testimonials.title}
           </h2>
@@ -76,7 +76,7 @@ export default function Testimonials() {
               // ✏️ تعديل: key بقى id
               key={item.id}
               className="group flex flex-col rounded-3xl bg-white p-7 shadow-sm ring-1 ring-zinc-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/5"
-              data-aos="fade-up"
+              data-motion="fade-up"
             >
               <Stars rating={item.rating ?? 5} label={t.testimonials.rating(item.rating ?? 5)} />
 

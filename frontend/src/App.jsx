@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import AOS from "aos";
+import { animate, inView } from "framer-motion";
 // ✏️ تعديل: استيراد Toaster
 import { Toaster } from "react-hot-toast";
 
@@ -27,19 +27,80 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({
-      duration: 500,
-      once: true,
-      offset: 10,
-      easing: "ease-out-cubic",
+    const observedElements = new Map();
+    const animatedElements = new WeakSet();
+
+    const observeElement = (element) => {
+      if (observedElements.has(element) || animatedElements.has(element)) return;
+
+      element.style.opacity = "0";
+      element.style.transform = "translate3d(0, 100px, 0)";
+
+      const duration = Number(element.dataset.motionDuration || 500);
+      const delay = Number(element.dataset.motionDelay || 0);
+      const offset = Number(element.dataset.motionOffset || 10);
+      const stopObserving = inView(
+        element,
+        () => {
+          animatedElements.add(element);
+          animate(
+            element,
+            { opacity: 1, y: 0 },
+            {
+              duration: duration / 1000,
+              delay: delay / 1000,
+              ease: [0.33, 1, 0.68, 1],
+            },
+          );
+        },
+        { margin: `0px 0px -${offset}px 0px` },
+      );
+
+      observedElements.set(element, stopObserving);
+    };
+
+    const observeTree = (node) => {
+      if (!(node instanceof Element)) return;
+      if (node.matches("[data-motion]")) observeElement(node);
+      node.querySelectorAll("[data-motion]").forEach(observeElement);
+    };
+
+    const stopObservingTree = (node) => {
+      if (!(node instanceof Element)) return;
+      const elements = [node, ...node.querySelectorAll("[data-motion]")];
+      elements.forEach((element) => {
+        observedElements.get(element)?.();
+        observedElements.delete(element);
+      });
+    };
+
+    observeTree(document.body);
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      const addedNodes = new Set();
+      const removedNodes = new Set();
+
+      mutations.forEach(({ addedNodes: added, removedNodes: removed }) => {
+        added.forEach((node) => addedNodes.add(node));
+        removed.forEach((node) => removedNodes.add(node));
+      });
+
+      addedNodes.forEach(observeTree);
+      removedNodes.forEach((node) => {
+        if (node instanceof Element && !node.isConnected) stopObservingTree(node);
+      });
     });
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-      AOS.refresh();
-    }, 800);
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
-    return () => clearTimeout(timer);
+    const timer = setTimeout(() => setLoading(false), 800);
+
+    return () => {
+      clearTimeout(timer);
+      mutationObserver.disconnect();
+      observedElements.forEach((stopObserving) => stopObserving());
+      observedElements.clear();
+    };
   }, []);
 
   if (loading) {

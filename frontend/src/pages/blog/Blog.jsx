@@ -57,7 +57,7 @@ export default function Blog() {
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-12 flex flex-col gap-6 sm:mb-16 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic" data-aos-offset="30">
+          <div className="max-w-2xl" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
             <h2 className="text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-h2 font-semibold leading-[1.2] tracking-tight text-transparent">
               {t.blog.homeTitle}
             </h2>
@@ -67,10 +67,9 @@ export default function Blog() {
 
           <Link
             to="/blog"
-            data-aos="fade-up"
-            data-aos-duration="700"
-            data-aos-easing="ease-out-cubic"
-            data-aos-offset="30"
+            data-motion="fade-up"
+            data-motion-duration="700"
+            data-motion-offset="30"
             className={`group inline-flex w-fit items-center gap-2.5 rounded-full border border-[#ff4d00]/40 px-5 py-2.5 text-small font-medium text-[#ff4d00] transition hover:border-[#ff4d00] hover:bg-[#ff4d00] hover:text-white ${focusRing}`}
           >
             {t.blog.viewAll}
@@ -82,10 +81,9 @@ export default function Blog() {
         {featured && (
           <Link
             to={`/blog/${featured.id}`}
-            data-aos="fade-up"
-            data-aos-duration="700"
-            data-aos-easing="ease-out-cubic"
-            data-aos-offset="30"
+            data-motion="fade-up"
+            data-motion-duration="700"
+            data-motion-offset="30"
             className={`group grid grid-cols-1 items-center gap-6 rounded-3xl bg-zinc-50 p-3 ring-1 ring-zinc-900/5 transition duration-300 hover:bg-zinc-100/70 sm:p-4 md:grid-cols-[1.45fr_1fr] lg:gap-10 ${focusRing}`}
           >
             <div className="aspect-3/2 overflow-hidden rounded-2xl bg-zinc-200">
@@ -133,10 +131,9 @@ export default function Blog() {
             <Link
               key={post.id}
               to={`/blog/${post.id}`}
-              data-aos="fade-up"
-              data-aos-duration="700"
-              data-aos-easing="ease-out-cubic"
-              data-aos-offset="30"
+              data-motion="fade-up"
+              data-motion-duration="700"
+              data-motion-offset="30"
               className={`group flex flex-col rounded-2xl ${focusRing}`}
             >
               <div className="aspect-5/4 overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5">
@@ -164,5 +161,4 @@ export default function Blog() {
     </section>
   );
 }
-
 

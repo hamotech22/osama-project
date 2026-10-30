@@ -12,12 +12,11 @@ const stats = [
   { value: 12, suffix: "" },
 ];
 
-// إعدادات أنيميشن AOS المشتركة بين كل العناصر
+// إعدادات الحركة المشتركة بين العناصر
 const modern = {
-  "data-aos": "fade-up",
-  "data-aos-duration": "900",
-  "data-aos-easing": "ease-out-cubic",
-  "data-aos-offset": "60",
+  "data-motion": "fade-up",
+  "data-motion-duration": "900",
+  "data-motion-offset": "60",
 };
 
 export default function About() {

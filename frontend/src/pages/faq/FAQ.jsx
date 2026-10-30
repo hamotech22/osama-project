@@ -24,7 +24,7 @@ export default function FAQ() {
   const emailHref = `mailto:${info.email ?? FALLBACK.email}`;
 
   return (
-    <section id="faq" data-aos="fade-up" className="scroll-mt-24 bg-zinc-100 px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:py-24">
+    <section id="faq" data-motion="fade-up" className="scroll-mt-24 bg-zinc-100 px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-[1.4fr_0.9fr] lg:gap-14">
           {/* FAQ */}
@@ -63,7 +63,7 @@ export default function FAQ() {
 
           {/* Contact card */}
           <div
-            data-aos="fade-up"
+            data-motion="fade-up"
             className="relative isolate flex min-h-[400px] flex-col overflow-hidden rounded-2xl bg-[#ff4d00] p-6 shadow-xl shadow-[#ff4d00]/20 ring-1 ring-inset ring-white/15 sm:min-h-[420px] sm:rounded-3xl sm:p-8 md:p-10 lg:sticky lg:top-28"
           >
             {/* Glow */}

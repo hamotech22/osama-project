@@ -30,16 +30,16 @@ export default function Projects({ onLoadingChange }) {
   }, [onLoadingChange]);
 
   return (
-    <section id="projects" className="bg-white px-5 py-20 sm:py-28 md:px-10" data-aos="fade-up">
+    <section id="projects" className="bg-white px-5 py-20 sm:py-28 md:px-10" data-motion="fade-up">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <div
           className="mb-12 flex flex-col gap-6 sm:mb-16 md:flex-row md:items-end md:justify-between"
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="30"
+          data-motion="fade-up"
+          data-motion-duration="700"
+          data-motion-offset="30"
         >
-          <div className="max-w-2xl" data-aos="fade-up" data-aos-duration="700" data-aos-offset="30">
+          <div className="max-w-2xl" data-motion="fade-up" data-motion-duration="700" data-motion-offset="30">
             <h2 className="text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-h2 font-semibold leading-[1.1] tracking-tight text-transparent">
               {t.projects.homeTitle}
             </h2>
@@ -69,7 +69,7 @@ export default function Projects({ onLoadingChange }) {
           {/* [تعديل 2] نفس ترتيب العرض القديم (آخر 4 بالترتيب التصاعدي)،
               وبيشتغل صح حتى لو الـ endpoint تجاهل الباراميترات */}
           {[...projects].sort((a, b) => b.id - a.id).slice(0, 4).reverse().map((project) => (
-            <Link key={project.id} to={`/projects/${project.id}`} className={`group block rounded-3xl ${focusRing}`} data-aos="fade-up">
+            <Link key={project.id} to={`/projects/${project.id}`} className={`group block rounded-3xl ${focusRing}`} data-motion="fade-up">
               <div className="relative aspect-3/2 overflow-hidden rounded-3xl bg-zinc-100 shadow-lg shadow-zinc-900/5 ring-1 ring-zinc-900/5">
                 <img
                   src={project.image?.url ? STRAPI_URL + project.image.url : ""}

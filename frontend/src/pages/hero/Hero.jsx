@@ -41,7 +41,7 @@ function Card({ src, alt, ratio }) {
   return (
     <figure
       className={`group relative overflow-hidden rounded-3xl bg-zinc-100 shadow-lg shadow-zinc-900/5 ring-1 ring-zinc-900/5 ${ratio}`}
-      data-aos="fade-up"
+      data-motion="fade-up"
     >
       <img src={src} alt={alt} loading="lazy" className="size-full object-cover transition duration-700 ease-out group-hover:scale-105" />
 
@@ -75,10 +75,10 @@ export default function Hero() {
       />
 
       {/* Intro */}
-      <section className="mx-auto max-w-4xl px-5 pt-14 text-center sm:pt-20" data-aos="fade-up">
+      <section className="mx-auto max-w-4xl px-5 pt-14 text-center sm:pt-20" data-motion="fade-up">
         <span
           className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-3.5 py-1.5 text-small font-medium text-zinc-600 shadow-sm backdrop-blur"
-          data-aos="fade-up"
+          data-motion="fade-up"
         >
           <span className="relative flex size-2">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -90,17 +90,17 @@ export default function Hero() {
 
         <h1
           className="mt-6 text-balance bg-linear-to-b from-zinc-950 to-zinc-600 bg-clip-text text-display font-semibold leading-[1.05] tracking-tight text-transparent"
-          data-aos="fade-up"
+          data-motion="fade-up"
         >
           {t.hero.title1}
           <br className="hidden sm:block" /> {t.hero.title2}
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-pretty text-body leading-7 text-zinc-600" data-aos="fade-up">
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-body leading-7 text-zinc-600" data-motion="fade-up">
           {t.hero.desc}
         </p>
 
-        <div className="mt-9 flex justify-center" data-aos="fade-up">
+        <div className="mt-9 flex justify-center" data-motion="fade-up">
           <a href="#projects">
             <BTN>{t.hero.button}</BTN>
           </a>
@@ -111,8 +111,8 @@ export default function Hero() {
       <section
         id="portfolio"
         className="mx-auto mt-14 grid w-full max-w-6xl grid-cols-2 gap-3 px-5 sm:mt-20 sm:grid-cols-4 sm:gap-5 sm:px-8"
-        data-aos="fade-up"
-        data-aos-delay="120"
+        data-motion="fade-up"
+        data-motion-delay="120"
       >
         {columns.map((column, columnIndex) => (
           <div key={columnIndex} className={`flex flex-col gap-3 sm:gap-5 ${column.offset}`}>
